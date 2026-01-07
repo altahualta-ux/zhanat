@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Жанат 50 Жыл</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at top, #fff9f2 0%, #edd9bf 40%, #d2b48c 100%);
+      color: #2a1d12;
+      overflow-x: hidden;
+    }
+    .side-ornament {
+      position: fixed; top: 0; bottom: 0; width: 200px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='600' viewBox='0 0 300 600'><path d='M150 0 C60 80 240 160 150 240 C60 320 240 400 150 480 C60 560 240 640 150 720' fill='none' stroke='%23caa14a' stroke-width='8' stroke-opacity='0.3'/></svg>");
+      background-repeat: repeat-y; opacity: 0.6; z-index: 1; pointer-events: none;
+    }
+    .left { left: 0; }
+    .right { right: 0; transform: scaleX(-1); }
+    section { position: relative; z-index: 2; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px 20px; }
+    h1 { font-family: 'Cinzel', serif; font-size: clamp(40px, 8vw, 80px); background: linear-gradient(135deg, #8a5c14, #f7e3a1, #8a5c14); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px 0; }
+    .subtitle { font-family: 'Great Vibes', cursive; font-size: clamp(26px, 4vw, 40px); color: #7a4f10; }
+    .info { font-size: 20px; line-height: 1.8; margin: 30px 0; }
+    .info b { color: #8a5c14; font-size: 24px; }
+    .form-box { background: rgba(255, 255, 255, 0.5); padding: 30px; border-radius: 20px; backdrop-filter: blur(10px); width: 100%; max-width: 400px; border: 1px solid #caa14a; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+    input[type=text] { width: 100%; padding: 15px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #caa14a; font-size: 16px; outline: none; }
+    .options { display: flex; justify-content: space-around; margin-bottom: 25px; font-size: 18px; }
+    .options label { cursor: pointer; display: flex; align-items: center; gap: 8px; }
+    button { width: 100%; padding: 18px; border-radius: 35px; border: none; background: linear-gradient(135deg, #8a5c14, #f7e3a1); color: white; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+    button:hover { transform: scale(1.02); box-shadow: 0 10px 20px rgba(138,92,20,0.3); }
+    footer { margin-top: 40px; font-size: 12px; opacity: 0.6; }
+    @media (max-width: 600px) { .side-ornament { display: none; } }
+  </style>
+</head>
+<body>
+
+<div class="side-ornament left"></div>
+<div class="side-ornament right"></div>
+
+<section>
+  <div class="subtitle">Мерейтойға шақыру</div>
+  <h1>Жанат 50 Жыл</h1>
+  
+  <div class="info">
+    <p>📅 <b>14 ақпан</b>, сағат <b>16:00</b></p>
+    <p>📍 Павлодар қаласы</p>
+    <p>🏰 «Марсель» мейрамханасы</p>
+  </div>
+
+  <div class="form-box">
+    <p style="margin-bottom: 20px; font-weight: 600; font-size: 18px; color: #8a5c14;">Тойға келесіз бе?</p>
+    <form id="inviteForm">
+      <input type="text" id="guestName" placeholder="Аты-жөніңізді жазыңыз" required>
+      <div class="options">
+        <label><input type="radio" name="status" value="Иә, барамын! ✅" required> Иә</label>
+        <label><input type="radio" name="status" value="Өкінішке орай, бара алмаймын ❌"> Жоқ</label>
+      </div>
+      <button type="submit">Жауапты жіберу</button>
+    </form>
+  </div>
+
+  <footer>Сүйіспеншілікпен 🤍</footer>
+</section>
+
+<script>
+  document.getElementById('inviteForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // ВНИМАНИЕ: Замените цифры ниже на свой номер телефона (11 цифр)
+    const myNumber = '77071234567'; 
+    
+    const name = document.getElementById('guestName').value;
+    const status = document.querySelector('input[name="status"]:checked').value;
+    
+    // Формируем текст сообщения
+    const message = "Сәлеметсіз бе! Мен Жанаттың мерейтойына жауап қалдырдым:\n\n👤 Есімі: " + name + "\n✅ Жауабы: " + status;
+    
+    // Создаем ссылку для WhatsApp
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = "https://api.whatsapp.com/send?phone=" + myNumber + "&text=" + encodedMessage;
+    
+    // Выполняем переход
+    window.location.href = whatsappUrl;
+  });
+</script>
+
+</body>
+</html>
